@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景颜色设置为黑色-->
+    <item android:drawable="@android:color/white" />
+    <!-- 位于屏幕中央的logo图片-->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/onepiece" />
+    </item>
+</layer-list>
