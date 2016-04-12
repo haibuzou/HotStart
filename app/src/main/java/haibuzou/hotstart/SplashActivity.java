@@ -12,7 +12,6 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme_Lanoucher);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -21,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
             }
         },2000);
     }
