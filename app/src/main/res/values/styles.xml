@@ -8,8 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Launcher" parent="@android:style/Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/launcher_screen</item>
+    </style>
+
+    <style name="AppTheme.Splash" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+
     </style>
 
 </resources>
