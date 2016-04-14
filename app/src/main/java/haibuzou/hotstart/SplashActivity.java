@@ -37,58 +37,68 @@ public class SplashActivity extends Activity {
     }
 
     public void animate() {
-        logoImg = (ImageView) findViewById(R.id.logo_img);
-        onePieceImg = (ImageView) findViewById(R.id.one_piece);
-        ObjectAnimator moveImg = ObjectAnimator.ofFloat(logoImg, "translationY", -250);
-        moveImg.setDuration(1000);
-        moveImg.setStartDelay(300);
-        moveImg.setInterpolator(new DecelerateInterpolator(1.2f));
+            //中央的logo图标
+            logoImg = (ImageView) findViewById(R.id.logo_img);
+            //下方的文字图片
+            onePieceImg = (ImageView) findViewById(R.id.one_piece);
+            //logo图标上移动画
+            ObjectAnimator moveImg = ObjectAnimator.ofFloat(logoImg, "translationY", -90);
+            moveImg.setDuration(1000);
+            //设置延迟300毫秒开始动画
+            moveImg.setStartDelay(300);
+            moveImg.setInterpolator(new DecelerateInterpolator(1.2f));
 
-        final ObjectAnimator changeImg = ObjectAnimator.ofFloat(logoImg, "rotationY", 180);
-        changeImg.setDuration(1000);
-        changeImg.setStartDelay(200);
-        changeImg.setInterpolator(new DecelerateInterpolator(1.2f));
-        changeImg.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                logoImg.setImageResource(R.drawable.lufi);
-            }
-        });
+            //logo图标的旋转动画完成后
+            final ObjectAnimator changeImg = ObjectAnimator.ofFloat(logoImg, "rotationY", 180);
+            changeImg.setDuration(1000);
+            changeImg.setStartDelay(200);
+            changeImg.setInterpolator(new DecelerateInterpolator(1.2f));
+            //设置动画监听器
+            changeImg.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    //旋转动画完成后，更换图片
+                    logoImg.setImageResource(R.drawable.lufi);
+                }
+            });
 
-        ObjectAnimator onePieceAnimate = ObjectAnimator.ofFloat(onePieceImg, "translationY", 200);
-        onePieceAnimate.setDuration(1000);
-        onePieceAnimate.setStartDelay(800);
-        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+            //文字图片下移动画
+            ObjectAnimator onePieceAnimate = ObjectAnimator.ofFloat(onePieceImg, "translationY", 20);
+            onePieceAnimate.setDuration(1000);
+            onePieceAnimate.setStartDelay(800);
+            onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
 
-        ObjectAnimator scaleXAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleX", 1);
-        onePieceAnimate.setDuration(1000);
-        onePieceAnimate.setStartDelay(200);
-        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+            //文字图片x轴方向的缩放动画
+            ObjectAnimator scaleXAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleX", 1);
+            scaleXAnimate.setDuration(1000);
+            scaleXAnimate.setStartDelay(200);
+            scaleXAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
 
-        ObjectAnimator scaleYAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleY", 1);
-        onePieceAnimate.setDuration(1000);
-        onePieceAnimate.setStartDelay(200);
-        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+            //文字图片Y轴方向的缩放动画
+            ObjectAnimator scaleYAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleY", 1);
+            scaleYAnimate.setDuration(1000);
+            scaleYAnimate.setStartDelay(200);
+            scaleYAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
 
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playSequentially(moveImg,changeImg);
-        animatorSet.playTogether(onePieceAnimate,scaleXAnimate,scaleYAnimate);
-        animatorSet.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                        finish();
-                    }
-                }, 500);
-            }
-        });
-        animatorSet.start();
+            //使用AnimatorSet 播放多个动画
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playSequentially(moveImg, changeImg);
+            animatorSet.playTogether(onePieceAnimate, scaleXAnimate, scaleYAnimate);
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //动画完成后的跳转Activity
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            finish();
+                        }
+                    }, 500);
+                }
+            });
+            animatorSet.start();
+        }
     }
-
-
-}
