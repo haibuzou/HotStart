@@ -7,6 +7,15 @@
     tools:context="haibuzou.hotstart.SplashActivity">
 
     <ImageView
+        android:id="@+id/one_piece"
+        android:layout_gravity="center"
+        android:src="@drawable/one_piece_logo"
+        android:layout_width="wrap_content"
+        android:scaleX="0"
+        android:scaleY="0"
+        android:layout_height="wrap_content" />
+
+    <ImageView
         android:id="@+id/logo_img"
         android:src="@drawable/onepiece"
         android:layout_gravity="center"

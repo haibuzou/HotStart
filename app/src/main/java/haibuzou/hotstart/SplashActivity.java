@@ -16,6 +16,7 @@ public class SplashActivity extends Activity {
 
     Handler handler;
     ImageView logoImg;
+    ImageView onePieceImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SplashActivity extends Activity {
 
     public void animate() {
         logoImg = (ImageView) findViewById(R.id.logo_img);
+        onePieceImg = (ImageView) findViewById(R.id.one_piece);
         ObjectAnimator moveImg = ObjectAnimator.ofFloat(logoImg, "translationY", -250);
         moveImg.setDuration(1000);
         moveImg.setStartDelay(300);
@@ -54,8 +56,22 @@ public class SplashActivity extends Activity {
             }
         });
 
+        ObjectAnimator onePieceAnimate = ObjectAnimator.ofFloat(onePieceImg, "translationY", 80);
+        onePieceAnimate.setDuration(1000);
+        onePieceAnimate.setStartDelay(200);
+        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+
+        ObjectAnimator scaleXAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleX", 1);
+        onePieceAnimate.setDuration(1000);
+        onePieceAnimate.setStartDelay(200);
+        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+
+        ObjectAnimator scaleYAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleY", 1);
+        onePieceAnimate.setDuration(1000);
+        onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
+
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playSequentially(moveImg, changeImg);
+        animatorSet.play(moveImg).after(changeImg).after(onePieceAnimate).after(scaleXAnimate).with(scaleYAnimate);
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -63,10 +79,10 @@ public class SplashActivity extends Activity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         finish();
                     }
-                },500);
+                }, 500);
             }
         });
         animatorSet.start();
