@@ -56,9 +56,9 @@ public class SplashActivity extends Activity {
             }
         });
 
-        ObjectAnimator onePieceAnimate = ObjectAnimator.ofFloat(onePieceImg, "translationY", 80);
+        ObjectAnimator onePieceAnimate = ObjectAnimator.ofFloat(onePieceImg, "translationY", 200);
         onePieceAnimate.setDuration(1000);
-        onePieceAnimate.setStartDelay(200);
+        onePieceAnimate.setStartDelay(800);
         onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
 
         ObjectAnimator scaleXAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleX", 1);
@@ -68,10 +68,12 @@ public class SplashActivity extends Activity {
 
         ObjectAnimator scaleYAnimate = ObjectAnimator.ofFloat(onePieceImg, "ScaleY", 1);
         onePieceAnimate.setDuration(1000);
+        onePieceAnimate.setStartDelay(200);
         onePieceAnimate.setInterpolator(new DecelerateInterpolator(1.2f));
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(moveImg).after(changeImg).after(onePieceAnimate).after(scaleXAnimate).with(scaleYAnimate);
+        animatorSet.playSequentially(moveImg,changeImg);
+        animatorSet.playTogether(onePieceAnimate,scaleXAnimate,scaleYAnimate);
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
